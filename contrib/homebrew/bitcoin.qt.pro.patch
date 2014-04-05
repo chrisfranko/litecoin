@@ -38,3 +38,4 @@ index d938c07..e1dd4ec 100644
  }
  
  win32:DEFINES += WIN32
+

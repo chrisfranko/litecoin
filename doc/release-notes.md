@@ -1,16 +1,24 @@
 0.8.6.2 changes
 =============
 
-- Windows only: Fixes issue where network connectivity can fail.
+- Change N-Factor increment scheduling
 
-- Cleanup of SSE2 scrypt detection.
+- Fork to Kimoto Gravity Well difficulty adjustment at block 26754 (Around midday UTC on 1st February 2014)
 
-- Minor fixes:
-  - s/Bitcoin/Litecoin/ in the Coin Control example
-  - Fix custom build on MacOS X 10.9
-  - Fix QT5 custom build
-  - Update Debian build instructions
-  - Update Homebrew build 
+- Update to boost 1.55 to fix Windows connectivity issue
+
+- Fix custom build on MacOS X 10.9
+
+- Fix QT5 custom build
+
+- Update Debian build instructions
+
+- Update homebrew build
+
+- DNS seeds updated to include vtc.kilovolt.co.uk and vtcpool.co.uk
+
+- Checkpoint at block 24200
+
 
 0.8.6.1 changes
 =============
@@ -25,7 +33,7 @@
 
 - Peers older than protocol version 70002 are disconnected.  0.8.3.7 is the oldest compatible client.
 
-- Internal miner added back to Litecoin.  setgenerate now works, although it is generally a bad idea as it is significantly slower than external CPU miners.
+- Internal miner added back to Aiden.  setgenerate now works, although it is generally a bad idea as it is significantly slower than external CPU miners.
 
 - New RPC commands: getbestblockhash and verifychain
 
@@ -50,13 +58,13 @@
 
 Workaround negative version numbers serialization bug.
 
-Fix out-of-bounds check (Litecoin currently does not use this codepath, but we apply this
+Fix out-of-bounds check (Aiden currently does not use this codepath, but we apply this
 patch just to match Bitcoin 0.8.5.)
 
 0.8.4.1 changes
 ===============
 
-CVE-2013-5700 Bloom: filter crash issue - Litecoin 0.8.3.7 disabled bloom by default so was 
+CVE-2013-5700 Bloom: filter crash issue - Aiden 0.8.3.7 disabled bloom by default so was 
 unaffected by this issue, but we include their patches anyway just in case folks want to 
 enable bloomfilter=1.
 
@@ -67,7 +75,7 @@ CVE-2013-4627: Better fix for the fill-memory-with-orphaned-tx attack
 Fix multi-block reorg transaction resurrection.
 
 Fix non-standard disconnected transactions causing mempool orphans.  This bug could cause 
-nodes running with the -debug flag to crash, although it was lot less likely on Litecoin 
+nodes running with the -debug flag to crash, although it was lot less likely on Aiden 
 as we disabled IsDust() in 0.8.3.x.
 
 Mac OSX: use 'FD_FULLSYNC' with LevelDB, which will (hopefully!) prevent the database 

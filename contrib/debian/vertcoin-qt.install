@@ -1,0 +1,6 @@
+aiden-qt usr/bin
+share/pixmaps/aiden32.xpm usr/share/pixmaps
+share/pixmaps/aiden16.xpm usr/share/pixmaps
+share/pixmaps/aiden128.png usr/share/pixmaps
+debian/aiden-qt.desktop usr/share/applications
+debian/aiden-qt.protocol usr/share/kde4/services/
