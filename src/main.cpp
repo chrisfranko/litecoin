@@ -1224,6 +1224,9 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
 
 				if (BlockReading->nHeight > 50) {
 					if (PastRateActualSeconds < 1) { PastRateActualSeconds = 1; }
+				}else if (BlockReading->nHeight > 2923){
+					//this should slow down the upward difficulty change
+					if (PastRateActualSeconds < 10) { PastRateActualSeconds = 10; }
 				}
 				else {
 					if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
