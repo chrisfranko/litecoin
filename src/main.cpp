@@ -1230,7 +1230,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
 					if (PastRateActualSeconds < 1) { PastRateActualSeconds = 1; }
 				}
 				else if (BlockReading->nHeight > 2923){
-					if (PastRateActualSeconds < 5) { PastRateActualSeconds = 5; }
+					if (PastRateActualSeconds < 10) { PastRateActualSeconds = 10; }
 				}else{
 					if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
 				}
