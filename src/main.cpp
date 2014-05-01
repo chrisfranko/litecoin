@@ -1075,8 +1075,11 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
 {
     int64 nSubsidy = 50 * COIN;
 
-    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 840000); // Aiden: 840k blocks in ~4 years
+    // Subsidy is cut in half every 210000 blocks
+    nSubsidy >>= (nHeight / 210000); // cut blocks every 210k
+    if (nHeight >= 420000) nSubsidy = 12.5 // non-linear...
+    if (nHeight >= 840000) nSubsidy = 6.25 // non-linear...
+    if (nHeight >= 1680000) nSubsidy = 3.125 // set minimum payout
 
     return nSubsidy + nFees;
 }
