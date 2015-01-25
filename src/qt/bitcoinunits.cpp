@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "bitcoinunits.h"
 
 #include <QStringList>
@@ -45,9 +49,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Aidens");
-    case mBTC: return QString("Milli-Aidens (1 / 1,000)");
-    case uBTC: return QString("Micro-Aidens (1 / 1,000,000)");
+    case BTC: return QString("Aiden");
+    case mBTC: return QString("Milli-Aiden (1 / 1,000)");
+    case uBTC: return QString("Micro-Aiden (1 / 1,000,000)");
     default: return QString("???");
     }
 }
@@ -60,6 +64,17 @@ qint64 BitcoinUnits::factor(int unit)
     case mBTC: return 100000;
     case uBTC: return 100;
     default:   return 100000000;
+    }
+}
+
+qint64 BitcoinUnits::maxAmount(int unit)
+{
+    switch(unit)
+    {
+    case BTC:  return Q_INT64_C(21000000);
+    case mBTC: return Q_INT64_C(21000000000);
+    case uBTC: return Q_INT64_C(21000000000000);
+    default:   return 0;
     }
 }
 

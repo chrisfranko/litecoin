@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.6.5
+!define VERSION 0.9.3.1
 !define COMPANY "Aiden project"
 !define URL http://www.aidencoin.org/
 
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile aiden-0.8.6.5-win32-setup.exe
+OutFile aiden-0.9.3.1-win32-setup.exe
 InstallDir $PROGRAMFILES\Aiden
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.6.5
+VIProductVersion 0.9.3.1
 VIAddVersionKey ProductName Aiden
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

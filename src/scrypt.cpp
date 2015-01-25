@@ -258,7 +258,7 @@ void scrypt_N_1_1_256_sp_generic(const char *input, char *output, char *scratchp
 	for (k = 0; k < 32; k++)
 		X[k] = scrypt_le32dec(&B[4 * k]);
         
-        N = (1 << (Nfactor + 1));
+        N = (1 << (Nfactor));
         
 	for (i = 0; i < N; i++) {
 		memcpy(&V[i * 32], X, 128);
@@ -309,7 +309,7 @@ void scrypt_detect_sse2(unsigned int cpuid_edx)
 
 void scrypt_N_1_1_256(const char *input, char *output, unsigned char Nfactor)
 {
-	char scratchpad[((1 << (Nfactor + 1)) * 128 ) + 63];
+	char scratchpad[((1 << (Nfactor)) * 128 ) + 63];
 #if defined(USE_SSE2)
         // Detection would work, but in cases where we KNOW it always has SSE2,
         // it is faster to use directly than to use a function pointer or conditional.

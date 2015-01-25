@@ -1,75 +1,36 @@
-Aiden integration/staging tree
-================================
+*Unitus = United*
 
-http://www.Aidencoin.org
+1. Joined into a single entity.
+2. Involving the joint activity of multiple agents.
 
-Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2011-2013 Litecoin Developers
-Copyright (c) 2014 Franko is Freedom
 
-What is A?
-----------------
+Unitus is about bringing together smaller crypto-currencies and the communities that support them into a larger group capable of greater change, influence and innovation, whilst allowing each to maintain their own unique identities.
 
-Aiden is a lite version of Litecoin using scrypt-og as a proof-of-work algorithm.
- - 0.5 minute block targets
- - subsidy halving structure 
- - ~84 million total coins
+Every aspect of this project will be driven by the community, for the community.
 
-The rest is the same as Bitcoin.
- - 50 coins per block
- - 1 blocks to retarget difficulty using FGW
+**Specifications**
 
-For more information, as well as an immediately useable, binary version of
-the Aiden client sofware, see http://www.Aidenorg.org.
+* _Modern Wallet_ - Forked from Bitcoin Core 0.9.3, with significant influence from Myriadcoin (Multi-Algorithm) and Dogecoin (Merge-Mining)
+* _Multi-Algorithm_:
+  * Blake256 (8-round)
+  * Skein
+  * Qubit
+  * X11
+  * Yescrypt
+* All algorithms can be merge-mined (AuxPoW)
+* Each algorithm will have a 5 minute block time, resulting in a 1 minute block time for the whole network
+* Difficulty Retargeting:
+  * Each algorithm re-targets every block for that algorithm
+  * Uses average block time for past 10 blocks to alter difficulty towards 5 minutes
+  * Maximum change of 5% up or down during normal mining phase, but first 1999 blocks allow 20% change up or down
+* Fair Distribution:
+  * No Premine / IPO / ICO / Developer Donation. Just pure miner reward
+  * First 2,000 blocks increase from 1 UIS to 100 UIS (approx. 33 Hours) - total 31,799 UIS
+  * Every 7 days / 10,080 blocks thereafter the reward decays by 1% (compound)
+  * Decay continues until we reach 2 UIS (approx. June 2022, block 3,933,199, total 98,830,980 UIS) - and then this remains static for each block thereafter
+  * Mined blocks mature after 180 confirmations
+* No free transactions - minimum fee is 0.01 UIS
+* Peer-to-Peer Port: 50603
+* RPC Port: 50604
 
-License
--------
-
-Aiden is released under the terms of the MIT license. See `COPYING` for more
-information or see http://opensource.org/licenses/MIT.
-
-Development process
--------------------
-
-Developers work in their own trees, then submit pull requests when they think
-their feature or bug fix is ready.
-
-If it is a simple/trivial/non-controversial change, then one of the Aiden
-development team members simply pulls it.
-
-If it is a *more complicated or potentially controversial* change, then the patch
-submitter will be asked to start a discussion (if they haven't already) on the
-[mailing list](http://sourceforge.net/mailarchive/forum.php?forum_name=bitcoin-development).
-
-The patch will be accepted if there is broad consensus that it is a good thing.
-Developers should expect to rework and resubmit patches if the code doesn't
-match the project's coding conventions (see `doc/coding.txt`) or are
-controversial.
-
-The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
-regularly to indicate new official, stable release versions of Aiden.
-
-Testing
--------
-
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test. Please be patient and help out, and
-remember this is a security-critical project where any mistake might cost people
-lots of money.
-
-### Automated Testing
-
-Developers are strongly encouraged to write unit tests for new code, and to
-submit new unit tests for old code.
-
-Unit tests for the core code are in `src/test/`. To compile and run them:
-
-    cd src; make -f makefile.unix test
-
-Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
-
-    qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
-    make -f Makefile.test
-    ./Aiden-qt_test
 
