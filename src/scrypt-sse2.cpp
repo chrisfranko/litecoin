@@ -112,7 +112,7 @@ void scrypt_N_1_1_256_sp_sse2(const char *input, char *output, char *scratchpad,
 		}
 	}
 
-        N = (1 << (Nfactor + 1));
+        N = (1 << (Nfactor));
         
 	for (i = 0; i < N; i++) {
 		for (k = 0; k < 8; k++)
