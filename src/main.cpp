@@ -1386,7 +1386,7 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 ||
         (uint64_t)BlockLastSolved->nHeight < PastBlocksMin ||
-			AlgoCounter < PastBlocksMin || (uint64_t)BlockLastSolved->nHeight < 50) {
+			AlgoCounter < PastBlocksMin) {
         return Params().ProofOfWorkLimit(algo).GetCompact();
     }
     
@@ -1454,9 +1454,84 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
     return bnNew.GetCompact();
 }
 
+unsigned int LegacyGetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
+{
+    unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit().GetCompact();
+
+    // Genesis block
+    if (pindexLast == NULL)
+        return nProofOfWorkLimit;
+
+    // Only change once per interval
+    if ((pindexLast->nHeight+1) % nInterval != 0)
+    {
+        if (TestNet())
+        {
+            // Special difficulty rule for testnet:
+            // If the new block's timestamp is more than 2* 10 minutes
+            // then allow mining of a min-difficulty block.
+            if (pblock->nTime > pindexLast->nTime + nTargetSpacing*2)
+                return nProofOfWorkLimit;
+            else
+            {
+                // Return the last non-special-min-difficulty-rules-block
+                const CBlockIndex* pindex = pindexLast;
+                while (pindex->pprev && pindex->nHeight % nInterval != 0 && pindex->nBits == nProofOfWorkLimit)
+                    pindex = pindex->pprev;
+                return pindex->nBits;
+            }
+        }
+        return pindexLast->nBits;
+    }
+
+    // Go back by what we want to be 14 days worth of blocks
+    const CBlockIndex* pindexFirst = pindexLast;
+    for (int i = 0; pindexFirst && i < nInterval-1; i++)
+        pindexFirst = pindexFirst->pprev;
+    assert(pindexFirst);
+
+    // Limit adjustment step
+    int64_t nActualTimespan = pindexLast->GetBlockTime() - pindexFirst->GetBlockTime();
+    LogPrintf("  nActualTimespan = %d  before bounds\n", nActualTimespan);
+    if (nActualTimespan < nTargetTimespan/4)
+        nActualTimespan = nTargetTimespan/4;
+    if (nActualTimespan > nTargetTimespan*4)
+        nActualTimespan = nTargetTimespan*4;
+
+    // Retarget
+    CBigNum bnNew;
+    bnNew.SetCompact(pindexLast->nBits);
+    bnNew *= nActualTimespan;
+    bnNew /= nTargetTimespan;
+
+    if (bnNew > Params().ProofOfWorkLimit())
+        bnNew = Params().ProofOfWorkLimit();
+
+    /// debug print
+    LogPrintf("GetNextWorkRequired RETARGET\n");
+    LogPrintf("nTargetTimespan = %d    nActualTimespan = %d\n", nTargetTimespan, nActualTimespan);
+    LogPrintf("Before: %08x  %s\n", pindexLast->nBits, CBigNum().SetCompact(pindexLast->nBits).getuint256().ToString());
+    LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString());
+
+    return bnNew.GetCompact();
+}
+
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo)
 {
-	      return FrankoMultiAlgoGravityWell(pindexLast, algo);
+	 int DiffMode = 1; // legacy diff-mode
+        
+		if (fTestNet) {
+                if (pindexLast->nHeight+1 >= 50) { DiffMode = 2; } // aiden, 100 blocks after first legacy diff adjustment
+        }
+        else {         
+        	if (pindexLast->nHeight+1 >= 10) { DiffMode = 2; }  //aiden, 5 days after 27/01/2014 12:00 UTC
+        }
+        
+        if                (DiffMode == 1) { return LegacyGetNextWorkRequired(pindexLast, pblock); } //legacy diff mode
+        else if        (DiffMode == 2) { return FrankoMultiAlgoGravityWell(pindexLast, algo); } // KGW
+    
+		return FrankoMultiAlgoGravityWell(pindexLast, algo); // KGW
+
 }
 /*
 static const int64_t nMinActualTimespanInitial = nAveragingTargetTimespan * (100 - nMaxAdjustUpInitial) / 100;
