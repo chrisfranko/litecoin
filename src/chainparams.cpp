@@ -173,14 +173,14 @@ public:
         bnProofOfWorkLimit[ALGO_SKEIN] = CBigNum(~uint256(0) >> 1);
         bnProofOfWorkLimit[ALGO_QUBIT]  = CBigNum(~uint256(0) >> 1);
         bnProofOfWorkLimit[ALGO_X11] = CBigNum(~uint256(0) >> 1);
-        genesis.nTime    = 1392144119;
+        genesis.nTime    = 1422288163;
         genesis.nBits    = 0x1e0ffff0;
-        genesis.nNonce   = 2024049;
+        genesis.nNonce   = 181887;
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 18444;
         strDataDir = "regtest";
 	
-        assert(hashGenesisBlock == uint256("0x5706e2c132a4b9362656fe56568324a9035f540a361f77cadce7af4a55e4b0c8"));
+        assert(hashGenesisBlock == uint256("0x8974140c0959d36496fd28c4d64d2d13c310cd637dae01c6f581b2a7208a2d1f"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }
