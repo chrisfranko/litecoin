@@ -1504,12 +1504,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
 	 int DiffMode = 1; // legacy diff-mode
         
-		if (fTestNet) {
-                if (pindexLast->nHeight+1 >= 50) { DiffMode = 2; } // aiden, 100 blocks after first legacy diff adjustment
-        }
-        else {         
-        	if (pindexLast->nHeight+1 >= 10) { DiffMode = 2; }  //aiden, 5 days after 27/01/2014 12:00 UTC
-        }
+     if (pindexLast->nHeight+1 >= 10) { DiffMode = 2; }  //aiden, 5 days after 27/01/2014 12:00 UTC
+
         
         if                (DiffMode == 1) { return LegacyGetNextWorkRequired(pindexLast, pblock); } //legacy diff mode
         else if        (DiffMode == 2) { return FrankoMultiAlgoGravityWell(pindexLast, algo); } // KGW
