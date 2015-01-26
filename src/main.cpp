@@ -1456,7 +1456,7 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
 
 unsigned int LegacyGetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-    unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit().GetCompact();
+    unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit(0).GetCompact();
 
     // Genesis block
     if (pindexLast == NULL)
