@@ -1386,7 +1386,7 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 ||
         (uint64_t)BlockLastSolved->nHeight < PastBlocksMin ||
-			AlgoCounter < PastBlocksMin) {
+			AlgoCounter < PastBlocksMin || (uint64_t)BlockLastSolved->nHeight < 50) {
         return Params().ProofOfWorkLimit(algo).GetCompact();
     }
     
