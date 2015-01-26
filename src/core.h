@@ -532,7 +532,10 @@ public:
             case ALGO_X11:
 				return HashX11(BEGIN(nVersion), END(nNonce));
         }
-		return HashBlake(BEGIN(nVersion), END(nNonce));
+					uint256 thash;
+					// Caution: scrypt_N_1_1_256 assumes fixed length of 80 bytes
+					scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 6);
+					return thash;
     }
 
     int64_t GetBlockTime() const
