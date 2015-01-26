@@ -1488,8 +1488,8 @@ unsigned int LegacyGetNextWorkRequired(const CBlockIndex* pindexLast, const CBlo
     bnNew *= nActualTimespan;
     bnNew /= nTargetTimespan;
 
-    if (bnNew > Params().ProofOfWorkLimit())
-        bnNew = Params().ProofOfWorkLimit();
+    if (bnNew > Params().ProofOfWorkLimit(0))
+        bnNew = Params().ProofOfWorkLimit(0);
 
     /// debug print
     LogPrintf("GetNextWorkRequired RETARGET\n");
