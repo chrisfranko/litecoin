@@ -1508,13 +1508,10 @@ unsigned int LegacyGetNextWorkRequired(const CBlockIndex* pindexLast, const CBlo
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int algo)
 {
-	 int DiffMode = 1; // legacy diff-mode
-        
-     if (pindexLast->nHeight+1 >= 10) { DiffMode = 2; }  //aiden, 5 days after 27/01/2014 12:00 UTC
-
-        
-        if                (DiffMode == 1) { return LegacyGetNextWorkRequired(pindexLast, pblock); } //legacy diff mode
-        else if        (DiffMode == 2) { return FrankoMultiAlgoGravityWell(pindexLast, algo); } // KGW
+	       
+        if( (pindexLast->nHeight + 1) < 10 ){ 
+			return LegacyGetNextWorkRequired(pindexLast, pblock); 
+		}
     
 		return FrankoMultiAlgoGravityWell(pindexLast, algo); // KGW
 
