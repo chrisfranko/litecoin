@@ -1366,7 +1366,7 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
 				}
 
                 PastRateActualSeconds                        = BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
-                PastRateTargetSeconds                        = TargetBlocksSpacingSeconds * PastBlocksMass;
+                PastRateTargetSeconds                        = BlocksTargetSpacing  * PastBlocksMass;
                 PastRateAdjustmentRatio                        = double(1);
 
 				if (BlockReading->nHeight > 50) {
