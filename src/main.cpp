@@ -1510,6 +1510,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
 	       
         if( (pindexLast->nHeight + 1) < 10 ){ 
+			LogPrintf("pindexLast == % i RETARGET\n", (pindexLast->nHeight + 1));
 			return LegacyGetNextWorkRequired(pindexLast, pblock); 
 		}
     
