@@ -1288,11 +1288,11 @@ int64_t GetBlockValue(int nHeight, int64_t nFees)
     return nSubsidy + nFees;
 }
 
-static const int64_t nTargetTimespan = 7 * 60; // 5 minutes (NUM_ALGOS * 60 seconds)
-static const int64_t nTargetSpacing = 7 * 60; // 5 minutes (NUM_ALGOS * 60 seconds)
+static const int64_t nTargetTimespan = 30; // 5 minutes (NUM_ALGOS * 60 seconds)
+static const int64_t nTargetSpacing = 30; // 5 minutes (NUM_ALGOS * 60 seconds)
 static const int64_t nInterval = 720; // re-targets every blocks
 
-static const int64_t nAveragingInterval = 10; // 10 blocks
+static const int64_t nAveragingInterval = 100; // 10 blocks
 static const int64_t nAveragingTargetTimespan = nAveragingInterval * nTargetSpacing; // 50 minutes
 
 static const int64_t nMaxAdjustDownInitial = 20; // 20% adjustment down during initial mining phase (Height<1999)
@@ -1414,10 +1414,10 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
         PastRateAdjustmentRatio = double(1);
         
         if (BlockReading->nHeight > 50) {
-					if (PastRateActualSeconds < 1) { PastRateActualSeconds = 1; }
-				}else {
-					if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
-				}
+			if (PastRateActualSeconds < 1) { PastRateActualSeconds = 1; }
+		}else {
+			if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
+		}
         
         if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
             PastRateAdjustmentRatio = double(PastRateTargetSeconds) / double(PastRateActualSeconds);
