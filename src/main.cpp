@@ -1333,7 +1333,7 @@ unsigned int ComputeMinWork(unsigned int nBase, int64_t nTime, int algo)
 unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo) {
 	
 	unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit(algo).GetCompact();
-    LogPrintf("Proof Of Work Limit For Algo %i, is % i/n", algo, nProofOfWorkLimit);
+    LogPrintf("Proof Of Work Limit For Algo % i, is % i \n", algo, nProofOfWorkLimit);
 
     // Genesis block
     if (pindexLast == NULL){
@@ -1342,7 +1342,7 @@ unsigned int FrankoMultiAlgoGravityWell(const CBlockIndex* pindexLast, int algo)
 	}
 	const CBlockIndex* pindexPrevAlgo = GetLastBlockIndexForAlgo(pindexLast, algo);
     if (pindexPrevAlgo == NULL){
-		LogPrintf("pindexPrevAlgo == NULL for Algo %i, is % i/n", algo, nProofOfWorkLimit);
+		LogPrintf("pindexPrevAlgo == NULL for Algo % i, is % i \n", algo, nProofOfWorkLimit);
         return nProofOfWorkLimit;
 	}
     /* Franko Multi Algo Gravity Well */
