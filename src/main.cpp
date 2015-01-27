@@ -1290,7 +1290,7 @@ int64_t GetBlockValue(int nHeight, int64_t nFees)
 
 static const int64_t nTargetTimespan = 7 * 60; // 5 minutes (NUM_ALGOS * 60 seconds)
 static const int64_t nTargetSpacing = 7 * 60; // 5 minutes (NUM_ALGOS * 60 seconds)
-static const int64_t nInterval = 1; // re-targets every blocks
+static const int64_t nInterval = 720; // re-targets every blocks
 
 static const int64_t nAveragingInterval = 10; // 10 blocks
 static const int64_t nAveragingTargetTimespan = nAveragingInterval * nTargetSpacing; // 50 minutes
