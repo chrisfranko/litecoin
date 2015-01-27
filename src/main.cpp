@@ -49,7 +49,7 @@ bool fReindex = false;
 bool fBenchmark = false;
 bool fTxIndex = false;
 unsigned int nCoinCacheSize = 5000;
-int NEW_BLOCK_TARGET = 400000;
+int NEW_BLOCK_TARGET = 4000000;
 
 /** Fees smaller than this (in satoshi) are considered zero fee (for transaction creation) */
 int64_t CTransaction::nMinTxFee = 1000000;  // 0.01 ADN
