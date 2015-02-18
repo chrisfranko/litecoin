@@ -553,6 +553,10 @@ bool CTransaction::CheckTransaction(CValidationState &state) const
     // Size limits
     if (::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION) > MAX_BLOCK_SIZE)
         return state.DoS(100, error("CTransaction::CheckTransaction() : size limits failed"));
+        
+    //Invalidate bad block #2924
+    if (GetHash() == uint256("0x3269947e69bba53d6f5867bc207c798dabf79b35918ab35581ff8dec888b977d"))
+        return error("CheckBlock() : hash == 3269947e69bba53d6f5867bc207c798dabf79b35918ab35581ff8dec888b977d");
 
     // Check for negative or overflow output values
     int64 nValueOut = 0;
