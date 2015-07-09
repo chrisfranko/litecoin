@@ -5,9 +5,9 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.6.5
-!define COMPANY "Aiden project"
-!define URL http://www.aidencoin.org/
+!define VERSION 0.10.2.2
+!define COMPANY "Franko Collective"
+!define URL http://www.FRANKOS.org/COLLECTIVE
 
 # MUI Symbol Definitions
 !define MUI_ICON "../share/pixmaps/bitcoin.ico"
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile aiden-0.8.6.5-win32-setup.exe
+OutFile aiden-0.8.5.3-win32-setup.exe
 InstallDir $PROGRAMFILES\Aiden
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.6.5
+VIProductVersion 0.8.5.5
 VIAddVersionKey ProductName Aiden
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
