@@ -297,6 +297,6 @@ void scrypt_1024_1_1_256_sp(const char *input, char *output, char *scratchpad)
 
 void scrypt_1024_1_1_256(const char *input, char *output)
 {
-	char scratchpad[((1 << (Nfactor)) * 128 ) + 63];
+	char scratchpad[((1 << (6)) * 128 ) + 63];
 	scrypt_1024_1_1_256_sp(input, output, scratchpad);
 }
