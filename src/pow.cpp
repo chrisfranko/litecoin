@@ -92,19 +92,19 @@ unsigned int GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const CBlockH
 
 unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader *pblock, uint64_t TargetBlocksSpacingSeconds, uint64_t PastBlocksMin, uint64_t PastBlocksMax) {
     /* current difficulty formula, megacoin - kimoto gravity well */
-    const CBlockIndex  *BlockLastSolved                                = pindexLast;
-    const CBlockIndex  *BlockReading                                = pindexLast;
-    const CBlockHeader *BlockCreating                                = pblock;
-    BlockCreating                                = BlockCreating;
-    uint64_t                                PastBlocksMass                                = 0;
-    int64_t                                PastRateActualSeconds                = 0;
-    int64_t                                PastRateTargetSeconds                = 0;
-    double                                PastRateAdjustmentRatio                = double(1);
-    CBigNum                                PastDifficultyAverage;
-    CBigNum                                PastDifficultyAveragePrev;
-    double                                EventHorizonDeviation;
-    double                                EventHorizonDeviationFast;
-    double                                EventHorizonDeviationSlow;
+    const CBlockIndex  *BlockLastSolved  = pindexLast;
+    const CBlockIndex  *BlockReading     = pindexLast;
+    const CBlockHeader *BlockCreating    = pblock;
+    BlockCreating                        = BlockCreating;
+    uint64_t   PastBlocksMass            = 0;
+    int64_t    PastRateActualSeconds     = 0;
+    int64_t    PastRateTargetSeconds     = 0;
+    double     PastRateAdjustmentRatio   = double(1);
+    CBigNum    PastDifficultyAverage;
+    CBigNum    PastDifficultyAveragePrev;
+    double     EventHorizonDeviation;
+    double     EventHorizonDeviationFast;
+    double     EventHorizonDeviationSlow;
     double MagicNumber;
 
 
@@ -135,7 +135,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
             if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
         }
 
-        if (BlockReading->nHeight > 1310000){
+        if (BlockReading->nHeight > 1400000){
             //this should slow down the upward difficulty change
             MagicNumber = 144;
         }else{
@@ -175,22 +175,22 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
 unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int BlockHeight)
 {
 
-    if(BlockHeight > 1310000){
-        static const int64	BlocksTargetSpacing			= 2.5 * 60; // 2.5 minutes
-        unsigned int		TimeDaySeconds				= 60 * 60 * 24;
-        int64				PastSecondsMin				= TimeDaySeconds * 0.25;
-        int64				PastSecondsMax				= TimeDaySeconds * 7;
-        uint64				PastBlocksMin				= PastSecondsMin / BlocksTargetSpacing;
-        uint64				PastBlocksMax				= PastSecondsMax / BlocksTargetSpacing;
-    }else{
-        static const int64_t        BlocksTargetSpacing                        = 30; // 30 seconds
-        unsigned int                TimeDaySeconds                                = 60 * 60 * 24;
-        int64_t                       PastSecondsMin                                = TimeDaySeconds * 0.01;
-        int64_t                       PastSecondsMax                                = TimeDaySeconds * 0.14;
-        uint64_t                      PastBlocksMin                                = PastSecondsMin / BlocksTargetSpacing;
-        uint64_t                      PastBlocksMax                                = PastSecondsMax / BlocksTargetSpacing;
+        static const int64_t        BlocksTargetSpacing            = 30; // 30 seconds
+        unsigned int                TimeDaySeconds                 = 60 * 60 * 24;
+        int64_t                       PastSecondsMin               = TimeDaySeconds * 0.01;
+        int64_t                       PastSecondsMax               = TimeDaySeconds * 0.14;
+        uint64_t                      PastBlocksMin                = PastSecondsMin / BlocksTargetSpacing;
+        uint64_t                      PastBlocksMax                = PastSecondsMax / BlocksTargetSpacing;
 
-    }
+         if(BlockHeight > 1400000) {
+             BlocksTargetSpacing		= 2.5 * 60; // 2.5 minutes
+             TimeDaySeconds				= 60 * 60 * 24;
+             PastSecondsMin				= TimeDaySeconds * 0.25;
+             PastSecondsMax				= TimeDaySeconds * 7;
+             PastBlocksMin				= PastSecondsMin / BlocksTargetSpacing;
+             PastBlocksMax				= PastSecondsMax / BlocksTargetSpacing;
+         }
+
 
     return KimotoGravityWell(pindexLast, pblock, BlocksTargetSpacing, PastBlocksMin, PastBlocksMax);
 }
