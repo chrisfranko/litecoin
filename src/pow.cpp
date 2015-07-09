@@ -206,7 +206,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     //comment this out in a second
     LogPrintf("BlockHeight = %d\n", BlockHeight);
 
-    if(BlockHeight > 10){
+    if(BlockHeight >= 10){
         DiffMode = 2;
     }
 
