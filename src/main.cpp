@@ -1244,11 +1244,33 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex)
 
 CAmount GetBlockValue(int nHeight, const CAmount& nFees)
 {
-    CAmount nSubsidy = 0.25 * COIN;
-    // After 64 halvings the blockreward starts over, forever.
-    // Subsidy is cut in half every 22m blocks which will occur approximately every 22 years.
-    nSubsidy >>= (nHeight / Params().SubsidyHalvingInterval());
+    CAmount nSubsidy = 50 * COIN;
 
+// LEGACY - produces all coins in 8 years
+    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
+    //nSubsidy >>= (nHeight / 840000); // Aiden: 840k blocks in ~4 years
+
+    /*    UPDATED REWARD SCHEDULE
+    blocks   reward		coins		total coins		time (years)
+    210000   50			10500000	10500000		0.199771689
+    420000   25			10500000	21000000		0.599315068
+    840000   12.5		10500000	31500000		1.398401826
+    1680000  6.25		10500000	42000000		2.996575342
+    3360000  3.125		10500000	52500000		6.192922374
+    10080000 3.125		31500000	84000000		15.78196347
+    */
+    if(nHeight < 210000)
+        nSubsidy = 50 * COIN;
+    else if(nHeight < 420000)
+        nSubsidy = 25 * COIN;
+    else if(nHeight < 840000)
+        nSubsidy = 12.5 * COIN;
+    else if(nHeight < 1680000)
+        nSubsidy = 6.25 * COIN;
+    else if(nHeight < 10080000)
+        nSubsidy = 3.125 * COIN;
+    else
+        nSubsidy = 0 * COIN;
 
     return nSubsidy + nFees;
 }
