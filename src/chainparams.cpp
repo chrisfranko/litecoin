@@ -276,8 +276,7 @@ public:
         genesis.nNonce   = 181887;
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 18444;
-        strDataDir = "regtest";
-
+        
         assert(hashGenesisBlock == uint256("0x8974140c0959d36496fd28c4d64d2d13c310cd637dae01c6f581b2a7208a2d1f"));
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();  //! Regtest mode doesn't have any DNS seeds.
